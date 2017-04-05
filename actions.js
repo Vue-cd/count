@@ -1,7 +1,7 @@
 import {INCREMENT} from './types'
 export const increment = ({ commit,state },data) => {
   console.log('0000000000')
-  console.log(state)
+  console.log('state.count',state.count)
   console.log(data)
   commit('INCREMENT') //
 };

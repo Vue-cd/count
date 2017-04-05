@@ -1,7 +1,7 @@
 <template>
     <div>
         Clicked: {{ count }} timesincrementAsync
-        <button @click="increment">+</button>
+        <button @click="add">+</button>
         <div>{{name}}</div>
         <br>
         <br>
@@ -15,7 +15,7 @@
 
 <script>
     // 这是 就是通过script  这个组建业务逻辑  必须有 GETTERS 这个 否则数据是过不来的
-  //  import {increment} from './actions'
+    //  import {increment} from './actions'
     import  {count} from './getters'
     import  {mapGetters, mapActions, mapState} from 'vuex'
     // 这样可以使用所有的方法action
@@ -25,7 +25,7 @@
 //            getters: {//这边肯定是一个函数 从组件中获取最新的state
 //                count: count
 //            },
-          //  actions: {increment}
+            //  actions: {increment}
         },
         data(){
             return {
@@ -37,21 +37,27 @@
             ...mapGetters([
                 'count',
             ]),
+            // 请注意就是 mapState就是为了不走 getters
+//            ...mapState([
+//                'count',
+//            ]),
         },
         methods: {//请看注释 直接可以用action这个方法了
-            ...mapActions([
-                'increment' // 映射 this.increment() 为 this.$store.dispatch('increment')
-            ]),
+            // 方案1
+//            ...mapActions([
+//                'increment' // 映射 this.increment() 为 this.$store.dispatch('increment')
+//                // 这样是没有办法弄的  假如data的
+//            ]),
             // 方案3
 //            increment(){// 这样函数名字是 add 也是可以
 //                var data = {name: 'yanchongd'}
 //                this.increment(data)
 //            }
             // 方案2 这个是可以的 但是函数名字是 increment 不需要action
-//            add(){// 名字不能相等 如果需要加东西的就 使用this
-//                var data = {name: 'xxxx'}
-//                this.$store.dispatch('increment', data)
-//            }
+            add(){// 名字不能相等 如果需要加东西的就 使用this
+                var data = {name: 'xxxx'}
+                this.$store.dispatch('increment', data)
+            }
         }
     }
 </script>
